@@ -1053,27 +1053,85 @@
 
   <div class="main-wrapper centered" id="anti-captcha-container" style="display: none;" global="true">
     <div class="anti-captcha-wrapper" id="anti-captcha-settings">
-      <div class="column-wrap" style="gap: 6px; width: max-content;">
-        <div class="custom-select between">
+      <div class="column-wrap" style="gap: 12px; width: 100%; max-width: 680px;">
+        <div style="font-size: 15px; font-weight: 600; color: #fff; border-bottom: 1px solid var(--primary-border); padding-bottom: 6px; width: 100%;">
+          🌌 Обходы серверных защит и антиботов (Bypasses 3.0)
+        </div>
+
+        <div class="checkbox-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%;">
+          <label class="checkbox-container">
+            <input type="checkbox" id="bypass_chbx_limbo" keep section="captcha_bypass" key="bypass_limbo" launch-option checked>
+            <span class="checkmark"></span>
+            <span>Обход LimboAPI / LimboFilter</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="bypass_chbx_limbo_teleport" keep section="captcha_bypass" key="limbo_teleport" launch-option checked>
+            <span class="checkmark"></span>
+            <span>Авто AcceptTeleport (20 TPS)</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="bypass_chbx_baroness" keep section="captcha_bypass" key="bypass_baroness" launch-option checked>
+            <span class="checkmark"></span>
+            <span>Обход BaronessAuth</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="bypass_chbx_baroness_chat" keep section="captcha_bypass" key="baroness_chat" launch-option checked>
+            <span class="checkmark"></span>
+            <span>Авто-клик JSON run_command</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="bypass_chbx_nullcord" keep section="captcha_bypass" key="bypass_nullcord" launch-option checked>
+            <span class="checkmark"></span>
+            <span>Обход NullCordX & FlameCord</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="bypass_chbx_prejoin_ping" keep section="captcha_bypass" key="prejoin_ping" launch-option checked>
+            <span class="checkmark"></span>
+            <span>Pre-Join StatusRequest эмуляция</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="bypass_chbx_math_captcha" keep section="captcha_bypass" key="math_captcha" launch-option checked>
+            <span class="checkmark"></span>
+            <span>Решатель мат. капчи в чате (+,-,*)</span>
+          </label>
+
+          <label class="checkbox-container">
+            <input type="checkbox" id="bypass_chbx_auto_captcha_cmd" keep section="captcha_bypass" key="auto_captcha_cmd" launch-option checked>
+            <span class="checkmark"></span>
+            <span>Авто-ввод команды /captcha</span>
+          </label>
+        </div>
+
+        <div style="font-size: 15px; font-weight: 600; color: #fff; border-bottom: 1px solid var(--primary-border); padding-bottom: 6px; width: 100%; margin-top: 10px;">
+          🧩 Настройки распознавания Web & Map капчи
+        </div>
+
+        <div class="custom-select between" style="width: 100%;">
           <label tt="captcha-type:">Тип капчи:</label>
-          <select id="captcha-bypass_select_captcha-type" section="captcha_bypass" key="captcha_type" keep trigger launch-option>
-            <option value="web">Web</option>
-            <option value="map">Map</option>
+          <select id="captcha-bypass_select_captcha-type" section="captcha_bypass" key="captcha_type" keep trigger launch-option style="width: 180px;">
+            <option value="web">Web (Браузерная ссылка)</option>
+            <option value="map">Map (Карта в инвентаре)</option>
           </select>
         </div>
 
-        <div id="anti-map-captha-selects-container" style="display: none; flex-direction: column; gap: 6px;">
+        <div id="anti-map-captha-selects-container" style="display: none; flex-direction: column; gap: 6px; width: 100%;">
           <div class="custom-select between">
-            <label tt="captcha-solve-mode:">Режим:</label>
-            <select id="captcha-bypass_select_solve-mode" section="captcha_bypass" key="solve_mode" keep trigger launch-option>
+            <label tt="captcha-solve-mode:">Режим решения:</label>
+            <select id="captcha-bypass_select_solve-mode" section="captcha_bypass" key="solve_mode" keep trigger launch-option style="width: 180px;">
               <option value="manual" tt="manual-mode">Ручной</option>
-              <option value="auto" tt="auto-mode">Авто</option>
+              <option value="auto" tt="auto-mode">Автоматический (OCR/API)</option>
             </select>
           </div>
 
           <div class="custom-select between" id="anti-map-captcha-select-api-service-container" style="display: none;">
             <label tt="api-service:">API сервис:</label>
-            <select id="captcha-bypass_select_captcha-service" section="captcha_bypass" key="api_service" keep launch-option>
+            <select id="captcha-bypass_select_captcha-service" section="captcha_bypass" key="api_service" keep launch-option style="width: 180px;">
               <option value="2captcha">2captcha.com</option>
               <option value="truecaptcha">truecaptcha.org</option>
             </select>
@@ -1081,91 +1139,118 @@
           
           <div class="custom-select between">
             <label tt="captcha-subtype:">Подтип капчи:</label>
-            <select id="captcha-bypass_select_captcha-subtype" section="captcha_bypass" key="captcha_subtype" keep trigger launch-option>
-              <option value="inventory">Inventory</option>
-              <option value="frame">Frame</option>
+            <select id="captcha-bypass_select_captcha-subtype" section="captcha_bypass" key="captcha_subtype" keep trigger launch-option style="width: 180px;">
+              <option value="inventory">Инвентарь (GUI)</option>
+              <option value="frame">Рамка (Item Frame)</option>
             </select>
           </div>
 
           <div class="custom-select between" id="anti-map-captcha-select-size-container" style="display: none;">
-            <label tt="size:">Размер:</label>
-            <select id="captcha-bypass_select_captcha-size" section="captcha_bypass" key="captcha_size" keep trigger launch-option>
-              <option value="fixed" tt="size-fixed">Фиксированный</option>
+            <label tt="size:">Размер карты:</label>
+            <select id="captcha-bypass_select_captcha-size" section="captcha_bypass" key="captcha_size" keep trigger launch-option style="width: 180px;">
+              <option value="fixed" tt="size-fixed">Фиксированный (128x128)</option>
               <option value="dynamic" tt="size-dynamic">Динамический</option>
             </select>
           </div>
         </div>
-      </div>
 
-      <div class="options" id="anti-web-captcha-options">
-        <div class="form-input">
-          <label for="captcha-bypass_web_regex" class="text" tt="captcha-regex">Регулярное выражение</label>
-          <input type="text" id="captcha-bypass_web_regex" placeholder="https?://[^\s]+" value="https?://[^\s]+" keep section="captcha_bypass" key="regex" default="https?://[^\s]+" launch-option>
+        <div class="options" id="anti-web-captcha-options" style="width: 100%; margin-top: 5px;">
+          <div class="form-input" style="max-width: 100%;">
+            <label for="captcha-bypass_web_regex" class="text" tt="captcha-regex">Регулярное выражение поиска ссылки</label>
+            <input type="text" id="captcha-bypass_web_regex" placeholder="https?://[^\s]+" value="https?://[^\s]+" keep section="captcha_bypass" key="regex" default="https?://[^\s]+" launch-option>
+          </div>
+
+          <div class="form-input" style="max-width: 100%;">
+            <label for="captcha-bypass_web_required-url-part" class="text" tt="captcha-url-part">Обязательная часть ссылки</label>
+            <input type="text" id="captcha-bypass_web_required-url-part" placeholder="anti-bot" keep section="captcha_bypass" key="required_url_part" launch-option>
+          </div>
         </div>
 
-        <div class="form-input">
-          <label for="captcha-bypass_web_required-url-part" class="text" tt="captcha-url-part">Обязательная часть ссылки</label>
-          <input type="text" id="captcha-bypass_web_required-url-part" placeholder="anti-bot" keep section="captcha_bypass" key="required_url_part" launch-option>
-        </div>
-      </div>
+        <div class="options" id="anti-map-captcha-options" style="display: none; width: 100%; margin-top: 5px;">
+          <div class="form-input" id="anti-map-captcha-number-of-columns-container" style="display: none; max-width: 100%;">
+            <label for="captcha-bypass_map_number-of-columns" class="text" tt="number-of-columns">Количество колонок</label>
+            <input type="number" id="captcha-bypass_map_number-of-columns" placeholder="4" value="4" keep section="captcha_bypass" key="number_of_columns" default="4" launch-option>
+          </div>
 
-      <div class="options" id="anti-map-captcha-options" style="display: none;">
-        <div class="form-input" id="anti-map-captcha-number-of-columns-container" style="display: none;">
-          <label for="captcha-bypass_map_number-of-columns" class="text" tt="number-of-columns">Количество коллон</label>
-          <input type="number" id="captcha-bypass_map_number-of-columns" placeholder="4" value="4" keep section="captcha_bypass" key="number_of_columns" default="4" launch-option>
-        </div>
+          <div class="form-input" id="anti-map-captcha-number-of-rows-container" style="display: none; max-width: 100%;">
+            <label for="captcha-bypass_map_number-of-rows" class="text" tt="number-of-rows">Количество рядов</label>
+            <input type="number" id="captcha-bypass_map_number-of-rows" placeholder="3" value="3" keep section="captcha_bypass" key="number_of_rows" default="3" launch-option>
+          </div>
 
-        <div class="form-input" id="anti-map-captcha-number-of-rows-container" style="display: none;">
-          <label for="captcha-bypass_map_number-of-rows" class="text" tt="number-of-rows">Количество рядов</label>
-          <input type="number" id="captcha-bypass_map_number-of-rows" placeholder="3" value="3" keep section="captcha_bypass" key="number_of_rows" default="3" launch-option>
-        </div>
+          <div class="form-input" id="anti-map-captcha-max-pause" style="display: none; max-width: 100%;">
+            <label for="captcha-bypass_map_max-pause" class="text" tt="max-pause">Максимальная пауза (мс)</label>
+            <input type="number" id="captcha-bypass_map_max-pause" placeholder="1400" value="1400" keep section="captcha_bypass" key="max_pause" default="1400" launch-option>
+          </div>
 
-        <div class="form-input" id="anti-map-captcha-max-pause" style="display: none;">
-          <label for="captcha-bypass_map_max-pause" class="text" tt="max-pause">Максимальная пауза</label>
-          <input type="number" id="captcha-bypass_map_max-pause" placeholder="1400" value="1400" keep section="captcha_bypass" key="max_pause" default="1400" launch-option>
-        </div>
+          <div class="form-input" id="anti-map-captcha-user-id-container" style="display: none; max-width: 100%;">
+            <label for="captcha-bypass_map-captcha-user-id" class="text" tt="username">Имя пользователя API</label>
+            <input type="text" id="captcha-bypass_map-captcha-user-id" placeholder="john_doe" section="captcha_bypass" key="user_id" launch-option keep private>
+          </div>
 
-        <div class="form-input" id="anti-map-captcha-user-id-container" style="display: none;">
-          <label for="captcha-bypass_web_map-captcha-user-id" class="text" tt="username">Имя пользователя</label>
-          <input type="text" id="captcha-bypass_map-captcha-user-id" placeholder="john_doe" section="captcha_bypass" key="user_id" launch-option keep private>
-        </div>
-
-        <div class="form-input" id="anti-map-captcha-api-key-container" style="display: none;">
-          <label for="captcha-bypass_web_map-captcha-api-key" class="text" tt="api-key">API ключ</label>
-          <input type="text" id="captcha-bypass_map-captcha-api-key" placeholder="xxxx-xxxx-xxxxxxxx-xx" section="captcha_bypass" key="api_key" launch-option keep private>
+          <div class="form-input" id="anti-map-captcha-api-key-container" style="display: none; max-width: 100%;">
+            <label for="captcha-bypass_map-captcha-api-key" class="text" tt="api-key">API ключ сервиса</label>
+            <input type="text" id="captcha-bypass_map-captcha-api-key" placeholder="xxxx-xxxx-xxxxxxxx-xx" section="captcha_bypass" key="api_key" launch-option keep private>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="anti-captcha-wrapper" id="anti-captcha-cards" style="display: none;"></div>
-
     <div id="anti-captcha-wrappers"></div>
   </div>
 
-  <div class="main-wrapper" id="webhook-container" style="display: none;" global="true">
-    <div class="form-input">
-      <label for="webhook_url" class="text" tt="webhook-link">Ссылка</label>
-      <input type="text" id="webhook_url" placeholder="https://discord.com/api/webhooks/..." keep section="webhook" key="url" private launch-option>
+  <div class="main-wrapper" id="webhook-container" style="display: none; flex-direction: column; align-items: center; gap: 15px; padding: 25px 35px;" global="true">
+    <div style="font-size: 16px; font-weight: 600; color: #fff; width: 100%; border-bottom: 1px solid var(--primary-border); padding-bottom: 8px;">
+      🔔 Discord Webhook & Уведомления в реальном времени
     </div>
 
-    <div class="checkbox-group webhook-options">
+    <div class="form-input" style="max-width: 100%;">
+      <label for="webhook_url" class="text" tt="webhook-link">URL Discord Webhook</label>
+      <input type="text" id="webhook_url" placeholder="https://discord.com/api/webhooks/123456789/xxxxxx..." keep section="webhook" key="url" private launch-option>
+    </div>
+
+    <div class="checkbox-group webhook-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%;">
+      <label class="checkbox-container">
+        <input type="checkbox" id="webhook_send-bypass" keep section="webhook" key="send_bypass" launch-option checked>
+        <span class="checkmark"></span>
+        <span>Обход LimboAPI / Капчи решен</span>
+      </label>
+
+      <label class="checkbox-container">
+        <input type="checkbox" id="webhook_send-death" keep section="webhook" key="send_death" launch-option checked>
+        <span class="checkmark"></span>
+        <span>Смерть бота / Возрождение</span>
+      </label>
+
+      <label class="checkbox-container">
+        <input type="checkbox" id="webhook_send-pvp" keep section="webhook" key="send_pvp" launch-option checked>
+        <span class="checkmark"></span>
+        <span>PvP убийство игрока</span>
+      </label>
+
+      <label class="checkbox-container">
+        <input type="checkbox" id="webhook_send-low-health" keep section="webhook" key="send_low_health" launch-option checked>
+        <span class="checkmark"></span>
+        <span>Низкое здоровье (&lt; 5 HP)</span>
+      </label>
+
+      <label class="checkbox-container">
+        <input type="checkbox" id="webhook_send-kick-ban" keep section="webhook" key="send_kick_ban" launch-option checked>
+        <span class="checkmark"></span>
+        <span>Кик / Бан / Ошибка прокси</span>
+      </label>
+
       <label class="checkbox-container">
         <input type="checkbox" id="webhook_send-information" keep section="webhook" key="send_information" private launch-option>
         <span class="checkmark"></span>
-        <span tt="webhook-information">Информация</span>
+        <span tt="webhook-information">Общие статусы ботов</span>
       </label>
+    </div>
 
-      <label class="checkbox-container">
-        <input type="checkbox" id="webhook_send-data" keep section="webhook" private key="send_data" launch-option>
-        <span class="checkmark"></span>
-        <span tt="webhook-data">Данные</span>
-      </label>
-
-      <label class="checkbox-container">
-        <input type="checkbox" id="webhook_send-actions" keep section="webhook" private key="send_actions" launch-option>
-        <span class="checkmark"></span>
-        <span tt="webhook-actions">Действия</span>
-      </label>
+    <div style="display: flex; gap: 10px; width: 100%; margin-top: 10px;">
+      <button id="test-webhook-btn" style="padding: 8px 18px; border-radius: 8px; font-weight: 500; background: #27272a; border: 1px solid #3f3f46; color: #fff; cursor: pointer;">
+        🚀 Отправить тестовое уведомление
+      </button>
     </div>
   </div>
 
@@ -2307,13 +2392,17 @@
     </div>
   </div>
 
-  <div class="main-wrapper" id="ping-container" style="display: none;" global="true">
-    <div class="ping-wrapper">
-      <div style="display: flex; gap: 10px; justify-content: center; align-items: center;">
-        <div class="input-with-button" style="margin-top: 10px;">
-          <input type="text" id="ping-server-address" placeholder="mineblaze.net" keep private>
+  <div class="main-wrapper" id="ping-container" style="display: none; flex-direction: column; align-items: center; gap: 15px; padding: 20px 30px;" global="true">
+    <div style="font-size: 16px; font-weight: 600; color: #fff; width: 100%; border-bottom: 1px solid var(--primary-border); padding-bottom: 8px;">
+      📡 Анализатор сети, SRV-резолвер & Детектор защит
+    </div>
 
-          <button class="min" id="ping-server">
+    <div class="ping-wrapper" style="width: 100%; max-width: 680px; display: flex; flex-direction: column; gap: 12px;">
+      <div style="display: flex; gap: 10px; width: 100%;">
+        <div class="input-with-button" style="flex: 1;">
+          <input type="text" id="ping-server-address" placeholder="play.hypixel.net / mc.funtime.su" keep private style="width: 100%;">
+
+          <button class="min" id="ping-server" title="Отправить Ping">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-activity">
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
               <path d="M3 12h4l3 8l4 -16l3 8h4" />
@@ -2322,7 +2411,29 @@
         </div>
       </div>
 
-      <div class="info" id="ping-info"></div>
+      <div class="ping-details-cards" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-top: 10px;">
+        <div class="panel" style="padding: 12px 16px; background: var(--secondary-bg); border: 1px solid var(--secondary-border); border-radius: 8px;">
+          <div style="font-size: 13px; color: var(--muted-color); font-weight: 500;">🌐 Реальный адрес (SRV):</div>
+          <div id="ping-real-ip" style="font-size: 15px; color: #fff; font-weight: 600; margin-top: 4px;">–</div>
+        </div>
+
+        <div class="panel" style="padding: 12px 16px; background: var(--secondary-bg); border: 1px solid var(--secondary-border); border-radius: 8px;">
+          <div style="font-size: 13px; color: var(--muted-color); font-weight: 500;">🛡️ Детект защиты / Прокси:</div>
+          <div id="ping-protection-type" style="font-size: 15px; color: #38bdf8; font-weight: 600; margin-top: 4px;">NullCordX / LimboAPI (Detected)</div>
+        </div>
+
+        <div class="panel" style="padding: 12px 16px; background: var(--secondary-bg); border: 1px solid var(--secondary-border); border-radius: 8px;">
+          <div style="font-size: 13px; color: var(--muted-color); font-weight: 500;">⚙️ Ядро сервера & Версия:</div>
+          <div id="ping-server-core" style="font-size: 15px; color: #22c55e; font-weight: 600; margin-top: 4px;">Velocity 3.3.0 / Paper</div>
+        </div>
+
+        <div class="panel" style="padding: 12px 16px; background: var(--secondary-bg); border: 1px solid var(--secondary-border); border-radius: 8px;">
+          <div style="font-size: 13px; color: var(--muted-color); font-weight: 500;">📶 Пинг & Онлайн:</div>
+          <div id="ping-latency-status" style="font-size: 15px; color: #eab308; font-weight: 600; margin-top: 4px;">– ms</div>
+        </div>
+      </div>
+
+      <div class="info" id="ping-info" style="margin-top: 10px;"></div>
     </div>
   </div>
 
@@ -2420,6 +2531,18 @@
   </div>
 
   <div class="main-wrapper" id="journal-container" style="display: none;" global="true">
+    <div style="display: flex; gap: 10px; width: 100%; padding: 8px 12px; background: var(--secondary-bg); border-bottom: 1px solid var(--secondary-border); align-items: center; justify-content: space-between;">
+      <div style="display: flex; gap: 8px; align-items: center; flex: 1;">
+        <input type="text" id="journal-search-input" placeholder="🔍 Поиск по логам (limbo, baroness, pvp, chat)..." style="max-width: 340px; width: 100%; padding: 6px 12px; background: #101014; border: 1px solid #27272a; border-radius: 6px; color: #fff; font-size: 13px;">
+      </div>
+
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button id="export-journal-btn" style="padding: 4px 12px; border-radius: 6px; background: #27272a; border: 1px solid #3f3f46; color: #fff; font-size: 12px; cursor: pointer;">
+          💾 Экспорт
+        </button>
+      </div>
+    </div>
+
     <div class="log-content" id="log-content"></div>
 
     <div class="log-options-wrap">
@@ -2427,23 +2550,23 @@
         <label class="checkbox-container">
           <input type="checkbox" id="journal_chbx_show-system-logs" keep trigger checked>
           <span class="checkmark"></span>
-          <span tt="journal-system-logs">Системные логи</span>
+          <span tt="journal-system-logs">Системные</span>
         </label>
 
         <label class="checkbox-container">
-          <input type="checkbox" id="journal_chbx_show-extended-logs" keep trigger>
+          <input type="checkbox" id="journal_chbx_show-extended-logs" keep trigger checked>
           <span class="checkmark"></span>
-          <span tt="journal-extended-logs">Расширенные логи</span>
+          <span>Обходы защит</span>
         </label>
 
         <label class="checkbox-container">
-          <input type="checkbox" id="journal_chbx_auto-scroll" keep>
+          <input type="checkbox" id="journal_chbx_auto-scroll" keep checked>
           <span class="checkmark"></span>
           <span tt="journal-auto-scroll">Авто скролл</span>
         </label>
       </div>
 
-      <button class="min" id="clear-journal">
+      <button class="min" id="clear-journal" title="Очистить журнал">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
           <path d="M4 7l16 0" />

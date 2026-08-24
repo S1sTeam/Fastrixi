@@ -565,16 +565,19 @@ body {
   position: fixed;
   top: 35px;
   right: 0;
-  max-width: 610px;
-  width: 100%;
-  max-height: 570px;
-  height: 100%;
+  left: 390px;
+  width: auto;
+  max-width: calc(100vw - 390px);
+  height: calc(100vh - 35px);
+  max-height: calc(100vh - 35px);
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
   padding-top: 20px;
+  padding-bottom: 40px;
   margin: 0;
 }
 
@@ -1238,7 +1241,11 @@ button svg {
   background: var(--primary-bg);
   border-right: 1px solid var(--primary-border);
   width: 190px;
-  height: 100%;
+  height: calc(100vh - 35px);
+  max-height: calc(100vh - 35px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 40px;
 }
 
 .control-dashboard .button-list {
@@ -1258,9 +1265,12 @@ button svg {
 }
 
 .control-dashboard::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+  width: 4px;
+}
+
+.control-dashboard::-webkit-scrollbar-thumb {
+  background: var(--primary-border);
+  border-radius: 4px;
 }
 
 .control-dashboard .button-list button {

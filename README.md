@@ -3,7 +3,7 @@
 # ⚡ Fastrixi Client (Advanced Next-Gen Fork)
 
 <p align="center">
-  <img src="interface/assets/banner.png" alt="Fastrixi Banner" width="170" />
+  <img src="assets/banner.png" alt="Fastrixi Banner" width="170" />
 </p>
 
 ### Высокопроизводительный клиент и ботнет-экосистема для Minecraft на базе Rust (Azalea) & Tauri 2

@@ -1,0 +1,88 @@
+name: Release Multi-Platform Build
+
+on:
+  push:
+    tags:
+      - 'v*'
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 'windows-latest'
+            args: ''
+            target: 'x86_64-pc-windows-msvc'
+          - platform: 'ubuntu-22.04'
+            args: ''
+            target: 'x86_64-unknown-linux-gnu'
+          - platform: 'macos-latest'
+            args: ''
+            target: 'x86_64-apple-darwin'
+          - platform: 'macos-latest'
+            args: '--target aarch64-apple-darwin'
+            target: 'aarch64-apple-darwin'
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install Linux system dependencies
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
+
+      - name: Install npm dependencies
+        run: npm ci || npm install
+
+      - name: Build Web Assets
+        run: npm run build
+
+      - name: Build Tauri Application
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: v__VERSION__
+          releaseName: 'Fastrixi v__VERSION__'
+          releaseBody: |
+            ## 🌟 Fastrixi Fork Release v__VERSION__
+
+            ### 🚀 Ключевые возможности и изменения:
+            * **🎨 Dark Metallic UI & Glassmorphism:** Премиальный серебристо-металлический и карбоновый дизайн.
+            * **🌌 Anti-Bot & Protection Bypass 3.0:** Обход LimboAPI/LimboFilter (20 TPS физика), BaronessAuth (интерактивный чат), NullCordX.
+            * **⚔️ Combat 3.0:** Auto-Anchor & Glowstone, Auto-Crystal 2.0, Smart Surround, Legit Silent Aim.
+            * **🌾 Auto-Farm 3.0:** Auto-Fish 2.0, Auto-Miner 3D с X-Ray, Auto-Woodcutter с авто-посадкой, Smart Chest Sorter.
+            * **👥 Swarm Hivemind:** Построения роя (фаланга, круг, шеренга), режим охраны (Guard Mode).
+            * **📡 Deep Network & Ping:** SRV-lookup резолвер, детект ядра сервера, пинг через прокси.
+            * **🌐 Advanced Proxy Hub:** Фильтры SOCKS4/5/HTTP, живой пинг-чекер, правила ротации.
+            * **📜 Log Terminal & 2D/3D WebGL Radar:** Высокопроизводительный лог с поиском и визуализация мира.
+
+            ### 📦 Доступные загрузки:
+            * **Windows:** `.msi` (установщик), `.exe` (портативная версия)
+            * **Linux:** `.AppImage`, `.deb`
+            * **macOS:** `.dmg` (Intel & Apple Silicon)
+          releaseDraft: false
+          prerelease: false
+          args: ${{ matrix.args }}

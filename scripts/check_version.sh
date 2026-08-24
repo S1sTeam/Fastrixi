@@ -1,0 +1,24 @@
+#!/bin/bash
+
+echo ""
+
+version="$(jq -r '.version' package.json)"
+echo "[local] package.json: $version"
+
+version="$(jq -r '.version' package-lock.json)"
+echo "[local] package-lock.json: $version"
+
+version="$(sed -n 11p Cargo.toml | cut -c 12-16)"
+echo "[local] Cargo.toml: $version"
+
+version="$(jq -r '.version' ./app/tauri.conf.json)"
+echo "[local] app/tauri.conf.json: $version"
+
+version="$(sed -n 2p ./interface/typescript/version.ts | cut -c 32-36)"
+echo "[local] interface/typescript/version.ts: $version"
+
+version="$(sed -n 3p ./kernel/src/version.rs | cut -c 39-43)"
+echo "[local] kernel/src/version.rs: $version"
+
+version="$(jq -r '.version' fastrixi.version.json)"
+echo "[public] fastrixi.version.json: $version"

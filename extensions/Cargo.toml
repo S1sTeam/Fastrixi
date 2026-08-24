@@ -1,0 +1,12 @@
+[package]
+name = "fastrixi-extensions"
+description = "extensions for fastrixi"
+version.workspace = true
+repository.workspace = true
+authors.workspace = true
+edition.workspace = true
+
+[dependencies]
+bytes.workspace = true
+aes-gcm.workspace = true
+rand.workspace = true

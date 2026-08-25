@@ -1218,16 +1218,38 @@ button svg {
 	clip-path: polygon(50% 80%, 0 20%, 100% 20%);
 }
 
-.control-group {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 190px;
-  z-index: 1;
+.control-group-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: calc(100% - 16px);
+  margin: 10px 8px 6px 8px;
+  padding: 6px 10px;
+  background: var(--secondary-bg);
+  border: 1px solid var(--secondary-border);
+  border-radius: 8px;
+}
+
+.control-group-header svg {
+  width: 16px;
+  height: 16px;
+  color: var(--muted-color);
+  flex-shrink: 0;
+}
+
+.control-group-header input {
+  width: 100%;
   background: transparent;
   border: none;
-  border-radius: 0;
-  border-top: 1px solid var(--primary-border);
+  color: var(--default-color);
+  font-size: 13px;
+  font-family: var(--global-font-family);
+  outline: none;
+  padding: 0;
+}
+
+.control-group-header input::placeholder {
+  color: var(--placeholder-color);
 }
 
 .control-dashboard {
@@ -1245,7 +1267,7 @@ button svg {
   max-height: calc(100vh - 35px);
   overflow-y: auto;
   overflow-x: hidden;
-  padding-bottom: 40px;
+  padding-bottom: 25px;
 }
 
 .control-dashboard .button-list {
@@ -1253,9 +1275,9 @@ button svg {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  gap: 1px;
+  gap: 2px;
   width: 100%;
-  margin-top: 12px;
+  margin-top: 4px;
 }
 
 .control-dashboard .button-list .spliter {

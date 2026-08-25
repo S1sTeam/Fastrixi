@@ -949,19 +949,19 @@
     </div>
 
     <div class="between-wrapper" style="width: 100%; margin-top: 0;">
-      <div class="left" style="flex: 1; display: flex; flex-direction: column; gap: 8px;">
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <button id="filter-all-proxies" style="padding: 4px 10px; border-radius: 6px; background: #27272a; border: 1px solid #3f3f46; color: #fff; font-size: 12px; cursor: pointer;">Все</button>
-          <button id="filter-socks5-proxies" style="padding: 4px 10px; border-radius: 6px; background: #141418; border: 1px solid #27272a; color: #a1a1aa; font-size: 12px; cursor: pointer;">SOCKS5</button>
-          <button id="filter-socks4-proxies" style="padding: 4px 10px; border-radius: 6px; background: #141418; border: 1px solid #27272a; color: #a1a1aa; font-size: 12px; cursor: pointer;">SOCKS4</button>
-          <button id="filter-http-proxies" style="padding: 4px 10px; border-radius: 6px; background: #141418; border: 1px solid #27272a; color: #a1a1aa; font-size: 12px; cursor: pointer;">HTTP</button>
-        </div>
-
-        <div class="pretty-textarea" aria-labelledby="ta-label" style="height: 380px;">
-          <div class="frame" style="height: 100%;">
-            <label id="ta-label" class="label" tt="proxy-list">Список прокси (формат: socks5://ip:port или ip:port)</label>
-            <textarea id="proxy-list" placeholder="socks5://185.220.101.5:1080&#10;socks5://45.74.31.42:8846&#10;http://192.168.1.1:8080..." keep key="proxy_list" private launch-option style="height: 340px; font-family: 'JetBrains Mono', monospace; font-size: 12px;"></textarea>
+      <div class="left" style="flex: 1; display: flex; flex-direction: column;">
+        <div class="proxy-editor-panel" style="display: flex; flex-direction: column; width: 100%; max-width: 440px; height: 420px; background: var(--secondary-bg); border: 1px solid var(--secondary-border); border-radius: 12px; padding: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--primary-border); padding-bottom: 8px; margin-bottom: 8px;">
+            <div style="font-size: 13px; font-weight: 600; color: #fff;">Список прокси</div>
+            <div style="display: flex; gap: 4px; align-items: center;">
+              <button class="proxy-filter-btn active" id="filter-all-proxies" style="padding: 3px 8px; border-radius: 4px; background: #27272a; border: 1px solid #3f3f46; color: #fff; font-size: 11px; cursor: pointer;">Все</button>
+              <button class="proxy-filter-btn" id="filter-socks5-proxies" style="padding: 3px 8px; border-radius: 4px; background: #141418; border: 1px solid #27272a; color: #a1a1aa; font-size: 11px; cursor: pointer;">SOCKS5</button>
+              <button class="proxy-filter-btn" id="filter-socks4-proxies" style="padding: 3px 8px; border-radius: 4px; background: #141418; border: 1px solid #27272a; color: #a1a1aa; font-size: 11px; cursor: pointer;">SOCKS4</button>
+              <button class="proxy-filter-btn" id="filter-http-proxies" style="padding: 3px 8px; border-radius: 4px; background: #141418; border: 1px solid #27272a; color: #a1a1aa; font-size: 11px; cursor: pointer;">HTTP</button>
+              <button class="proxy-filter-btn" id="filter-remove-duplicates" style="padding: 3px 8px; border-radius: 4px; background: #141418; border: 1px solid #27272a; color: #a1a1aa; font-size: 11px; cursor: pointer;" title="Удалить повторяющиеся прокси">Уник.</button>
+            </div>
           </div>
+          <textarea id="proxy-list" placeholder="socks5://185.220.101.5:1080&#10;socks5://45.74.31.42:8846&#10;http://192.168.1.1:8080..." keep key="proxy_list" private launch-option style="flex: 1; width: 100%; background: transparent; border: none; outline: none; resize: none; color: #fff; font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.5;"></textarea>
         </div>
       </div>
 
@@ -2447,7 +2447,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" /></svg>
             <span>Детект защиты / Прокси:</span>
           </div>
-          <div id="ping-protection-type" style="font-size: 15px; color: #38bdf8; font-weight: 600; margin-top: 4px;">NullCordX / LimboAPI (Detected)</div>
+          <div id="ping-protection-type" style="font-size: 15px; color: #38bdf8; font-weight: 600; margin-top: 4px;">–</div>
         </div>
 
         <div class="panel" style="padding: 12px 16px; background: var(--secondary-bg); border: 1px solid var(--secondary-border); border-radius: 8px;">
@@ -2455,7 +2455,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" /><path d="M9 4v16" /><path d="M15 4v16" /></svg>
             <span>Ядро сервера и версия:</span>
           </div>
-          <div id="ping-server-core" style="font-size: 15px; color: #22c55e; font-weight: 600; margin-top: 4px;">Velocity 3.3.0 / Paper</div>
+          <div id="ping-server-core" style="font-size: 15px; color: #22c55e; font-weight: 600; margin-top: 4px;">–</div>
         </div>
 
         <div class="panel" style="padding: 12px 16px; background: var(--secondary-bg); border: 1px solid var(--secondary-border); border-radius: 8px;">

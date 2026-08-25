@@ -28,6 +28,59 @@ class Logger {
 	public init(): void {
 		this.journal = document.getElementById("log-content") as HTMLDivElement;
 		document.getElementById("clear-journal")?.addEventListener("click", () => this.clear());
+		document.getElementById("export-journal-btn")?.addEventListener("click", () => this.exportLogs());
+		document.getElementById("journal-search-input")?.addEventListener("input", (e) => {
+			const query = (e.target as HTMLInputElement).value;
+			this.filterLogs(query);
+		});
+	}
+
+	/** Экспорт журнала в файл .txt */
+	public exportLogs(): void {
+		if (!this.journal) return;
+		const lines = document.querySelectorAll(".log-line");
+		if (lines.length === 0) {
+			this.log("Журнал пуст, нечего экспортировать", "system");
+			return;
+		}
+
+		let textOutput = `=== Fastrixi Client Logs [${date()}] ===\n\n`;
+		lines.forEach(line => {
+			const dateText = line.querySelector(".log-line-date")?.textContent || "";
+			const contentText = line.querySelector(".log-line-content")?.textContent || "";
+			textOutput += `[${dateText}] ${contentText}\n`;
+		});
+
+		const blob = new Blob([textOutput], { type: "text/plain;charset=utf-8" });
+		const url = URL.createObjectURL(blob);
+		const anchor = document.createElement("a");
+		const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+		anchor.href = url;
+		anchor.download = `fastrixi_logs_${timestamp}.txt`;
+		document.body.appendChild(anchor);
+		anchor.click();
+		document.body.removeChild(anchor);
+		URL.revokeObjectURL(url);
+		this.log("Логи успешно экспортированы в файл", "system");
+	}
+
+	/** Фильтрация строк журнала по поисковому запросу */
+	public filterLogs(query: string): void {
+		const lowerQuery = query.toLowerCase().trim();
+		document.querySelectorAll<HTMLElement>(".log-line").forEach(line => {
+			const content = line.querySelector(".log-line-content")?.textContent?.toLowerCase() || "";
+			const date = line.querySelector(".log-line-date")?.textContent?.toLowerCase() || "";
+			if (lowerQuery === "" || content.includes(lowerQuery) || date.includes(lowerQuery)) {
+				const logType = line.getAttribute("log-type");
+				if ((logType === "system" && !this.statistics.visible.system) || (logType === "extended" && !this.statistics.visible.extended)) {
+					line.style.display = "none";
+				} else {
+					line.style.display = "flex";
+				}
+			} else {
+				line.style.display = "none";
+			}
+		});
 	}
 
 	/** 
